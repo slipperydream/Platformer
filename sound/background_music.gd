@@ -2,8 +2,8 @@ extends AudioStreamPlayer2D
 
 @export var song_dir : String = "res://sound/music/"
 
-var current_song : AudioStreamOggVorbis
-var playlist : Array[AudioStreamOggVorbis] = []
+var current_song : AudioStreamMP3
+var playlist : Array[AudioStreamMP3] = []
 var default_fade_time : float = 1.25
 var loops : int = 0
 var max_loops : int = 3
@@ -21,7 +21,7 @@ func get_songs(path):
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		while file_name != "":
-			if file_name.get_extension() == 'ogg':
+			if file_name.get_extension() == 'mp3':
 				var song_title = path+file_name
 				var song = load(song_title)
 				playlist.append(song)

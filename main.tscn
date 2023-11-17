@@ -1,6 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://c3akcbehailqv"]
+[gd_scene load_steps=8 format=3 uid="uid://c3akcbehailqv"]
 
+[ext_resource type="PackedScene" uid="uid://7sy7gc06sx86" path="res://ui/life_counter.tscn" id="3_prvo3"]
+[ext_resource type="Script" path="res://Camera2D2.gd" id="3_uuik2"]
+[ext_resource type="PackedScene" uid="uid://cmxeh4a4jblpp" path="res://ui/score_tracker.tscn" id="4_tomij"]
 [ext_resource type="PackedScene" uid="uid://bq57bsxjerwtm" path="res://world/levels/level.tscn" id="5_0vttg"]
+[ext_resource type="PackedScene" uid="uid://b7rmd6tm1lldq" path="res://ui/time.tscn" id="5_xw3k8"]
+[ext_resource type="PackedScene" uid="uid://cvvmq0aqv4vfs" path="res://ui/end_game_banner.tscn" id="6_m2msb"]
 [ext_resource type="PackedScene" uid="uid://ckk8h8uqnjggi" path="res://player/player.tscn" id="6_qblrp"]
 
 [node name="Main" type="Node2D"]
@@ -8,4 +13,33 @@
 [node name="TileMap" parent="." instance=ExtResource("5_0vttg")]
 
 [node name="Player" parent="TileMap" instance=ExtResource("6_qblrp")]
-position = Vector2(100, 450)
+position = Vector2(153, 459)
+
+[node name="Camera2D2" type="Camera2D" parent="TileMap/Player"]
+offset = Vector2(425, -150)
+script = ExtResource("3_uuik2")
+
+[node name="LifeCounter" parent="TileMap/Player/Camera2D2" instance=ExtResource("3_prvo3")]
+offset_left = 61.0
+offset_top = -459.0
+offset_right = 133.0
+offset_bottom = -424.0
+
+[node name="ScoreTracker" parent="TileMap/Player/Camera2D2" instance=ExtResource("4_tomij")]
+offset_left = -153.0
+offset_top = -459.0
+offset_right = 103.0
+offset_bottom = -387.0
+
+[node name="Time" parent="TileMap/Player/Camera2D2" instance=ExtResource("5_xw3k8")]
+offset_left = 421.0
+offset_top = -459.0
+offset_right = 470.0
+offset_bottom = -391.0
+
+[node name="EndGameBanner" parent="TileMap/Player/Camera2D2" instance=ExtResource("6_m2msb")]
+visible = false
+offset_left = 295.0
+offset_top = -309.0
+offset_right = 551.0
+offset_bottom = -245.0

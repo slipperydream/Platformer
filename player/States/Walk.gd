@@ -26,7 +26,6 @@ func physics_update(delta):
 		player.velocity.x = move_toward(player.velocity.x, 0, player.speed)
 		
 	if Input.is_action_just_pressed("jump"):
-		print("walk -> jump")
 		Transitioned.emit(self, "jump")
 		
 	if Input.is_action_just_pressed("duck"):

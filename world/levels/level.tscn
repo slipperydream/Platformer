@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bq57bsxjerwtm"]
+[gd_scene load_steps=8 format=3 uid="uid://bq57bsxjerwtm"]
 
 [ext_resource type="Texture2D" uid="uid://81n5xobi81dh" path="res://world/platformPack_tilesheet.png" id="1_65h4v"]
 [ext_resource type="PackedScene" uid="uid://bmi1sl6ll8p8j" path="res://enemies/walker.tscn" id="2_p6sed"]
 [ext_resource type="PackedScene" uid="uid://bkexgde2skcan" path="res://world/tiles/item_block.tscn" id="3_p2anr"]
 [ext_resource type="PackedScene" uid="uid://c0hqatytmx7i1" path="res://items/plumber_cartridge.tscn" id="5_ak4lg"]
-[ext_resource type="Texture2D" uid="uid://e0d40jel0khq" path="res://items/plumber_cartridge.png" id="6_4qkwo"]
 [ext_resource type="PackedScene" uid="uid://bky5go0nr0biq" path="res://world/tiles/destroyable_block.tscn" id="7_cfclj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ow05n"]
@@ -7361,4 +7360,3 @@ position = Vector2(758, 141)
 
 [node name="Cartridge" parent="." instance=ExtResource("5_ak4lg")]
 position = Vector2(306, 491)
-image = ExtResource("6_4qkwo")

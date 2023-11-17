@@ -2,7 +2,7 @@ extends State
 class_name Duck
 
 func enter():
-	pass
+	player.sprites.play("duck")
 	
 func exit():
 	pass
@@ -16,8 +16,6 @@ func update(_delta):
 func physics_update(delta):
 	if Input.is_action_just_released("duck"):
 		Transitioned.emit(self, "idle")
-	if Input.is_action_pressed("duck"):
-		player.sprites.play("duck")
 	
 	if Input.is_action_just_pressed("move_left") or Input.is_action_just_pressed("move_right"):
 		Transitioned.emit(self, "walk")
