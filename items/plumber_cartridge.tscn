@@ -10,6 +10,7 @@ size = Vector2(41, 36)
 collision_layer = 32
 collision_mask = 17
 script = ExtResource("1_cem0i")
+image = ExtResource("2_su3rd")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(1.5, 4)

@@ -1,10 +1,15 @@
-[gd_scene load_steps=31 format=3 uid="uid://ckk8h8uqnjggi"]
+[gd_scene load_steps=36 format=3 uid="uid://ckk8h8uqnjggi"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_r5672"]
 [ext_resource type="Texture2D" uid="uid://dprei3wjkreir" path="res://player/platformerPack_character.png" id="2_uvg88"]
 [ext_resource type="PackedScene" uid="uid://ctc48s6nmiom3" path="res://components/health_component.tscn" id="3_i04tb"]
 [ext_resource type="PackedScene" uid="uid://dyb73gwdeh1c2" path="res://components/hurtbox_component.tscn" id="4_5c1wd"]
 [ext_resource type="PackedScene" uid="uid://dsbuqlt6yb7a8" path="res://components/hitbox_component.tscn" id="5_ar1nc"]
+[ext_resource type="Script" path="res://player/StateMachine.gd" id="6_pheev"]
+[ext_resource type="Script" path="res://player/States/Idle.gd" id="7_fos4s"]
+[ext_resource type="Script" path="res://player/States/Walk.gd" id="8_pl24t"]
+[ext_resource type="Script" path="res://player/States/Jump.gd" id="9_xs70n"]
+[ext_resource type="Script" path="res://player/States/Duck.gd" id="10_c84k7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ib5k"]
 size = Vector2(56, 68.5)
@@ -218,7 +223,7 @@ _data = {
 "pickup": SubResource("Animation_55pju")
 }
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_mask = 92
 script = ExtResource("1_r5672")
 
@@ -270,6 +275,22 @@ debug_color = Color(0.498039, 0.580392, 0.121569, 0.419608)
 libraries = {
 "": SubResource("AnimationLibrary_1u4mh")
 }
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("6_pheev")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("7_fos4s")
+
+[node name="Walk" type="Node" parent="StateMachine"]
+script = ExtResource("8_pl24t")
+
+[node name="Jump" type="Node" parent="StateMachine"]
+script = ExtResource("9_xs70n")
+
+[node name="Duck" type="Node" parent="StateMachine"]
+script = ExtResource("10_c84k7")
 
 [connection signal="hit" from="HealthComponent" to="." method="_on_health_component_hit"]
 [connection signal="killed" from="HealthComponent" to="." method="_on_health_component_killed"]
