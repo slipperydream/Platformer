@@ -1,59 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://c3akcbehailqv"]
+[gd_scene load_steps=3 format=3 uid="uid://c3akcbehailqv"]
 
-[ext_resource type="Texture2D" uid="uid://02idfkypfytb" path="res://world/bg_layer4.png" id="1_2uk7y"]
-[ext_resource type="Texture2D" uid="uid://cas51nxo3n4je" path="res://world/bg_layer1.png" id="1_q8pc6"]
-[ext_resource type="Texture2D" uid="uid://cntkd5qvx8eyk" path="res://world/bg_layer2.png" id="2_u56sc"]
-[ext_resource type="Texture2D" uid="uid://4mo3uh1ctuc2" path="res://world/bg_layer3.png" id="3_ilyvy"]
 [ext_resource type="PackedScene" uid="uid://bq57bsxjerwtm" path="res://world/levels/level.tscn" id="5_0vttg"]
 [ext_resource type="PackedScene" uid="uid://ckk8h8uqnjggi" path="res://player/player.tscn" id="6_qblrp"]
 
 [node name="Main" type="Node2D"]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="TileMap" parent="." instance=ExtResource("5_0vttg")]
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="CanvasLayer"]
-follow_viewport_enabled = true
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
-motion_mirroring = Vector2(1152, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/ParallaxBackground/ParallaxLayer"]
-position = Vector2(0, -375)
-scale = Vector2(0.56, 0.501)
-texture = ExtResource("1_q8pc6")
-centered = false
-
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
-motion_mirroring = Vector2(1152, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/ParallaxBackground/ParallaxLayer2"]
-position = Vector2(0, -375)
-scale = Vector2(0.56, 0.501)
-texture = ExtResource("2_u56sc")
-centered = false
-
-[node name="ParallaxLayer3" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
-motion_mirroring = Vector2(1152, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/ParallaxBackground/ParallaxLayer3"]
-position = Vector2(0, -375)
-scale = Vector2(0.56, 0.501)
-texture = ExtResource("3_ilyvy")
-centered = false
-
-[node name="ParallaxLayer4" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
-motion_mirroring = Vector2(1152, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/ParallaxBackground/ParallaxLayer4"]
-position = Vector2(0, -375)
-scale = Vector2(0.56, 0.501)
-texture = ExtResource("1_2uk7y")
-centered = false
-
-[node name="TileMap" parent="CanvasLayer" instance=ExtResource("5_0vttg")]
-
-[node name="Player" parent="CanvasLayer" instance=ExtResource("6_qblrp")]
+[node name="Player" parent="TileMap" instance=ExtResource("6_qblrp")]
 position = Vector2(100, 450)
-
-[node name="Camera2D" type="Camera2D" parent="CanvasLayer/Player"]
-position = Vector2(-100, -450)

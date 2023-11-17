@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bmi1sl6ll8p8j"]
+[gd_scene load_steps=12 format=3 uid="uid://bmi1sl6ll8p8j"]
 
 [ext_resource type="Script" path="res://enemies/walker.gd" id="1_fiel7"]
 [ext_resource type="Texture2D" uid="uid://c48kxefsl1fj0" path="res://enemies/walker.png" id="2_xgmoi"]
@@ -6,111 +6,77 @@
 [ext_resource type="PackedScene" uid="uid://dyb73gwdeh1c2" path="res://components/hurtbox_component.tscn" id="4_w7r26"]
 [ext_resource type="PackedScene" uid="uid://dsbuqlt6yb7a8" path="res://components/hitbox_component.tscn" id="5_5s5qx"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_e6u10"]
-atlas = ExtResource("2_xgmoi")
-region = Rect2(0, 0, 50, 44)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rgrba"]
-atlas = ExtResource("2_xgmoi")
-region = Rect2(100, 0, 50, 44)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0q3mf"]
-atlas = ExtResource("2_xgmoi")
-region = Rect2(150, 0, 50, 44)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tl1u1"]
-atlas = ExtResource("2_xgmoi")
-region = Rect2(0, 0, 50, 44)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bdabr"]
-atlas = ExtResource("2_xgmoi")
-region = Rect2(50, 0, 50, 44)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ssdgx"]
-atlas = ExtResource("2_xgmoi")
-region = Rect2(0, 0, 50, 44)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7n5li"]
-atlas = ExtResource("2_xgmoi")
-region = Rect2(50, 0, 50, 44)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dpvxm"]
-atlas = ExtResource("2_xgmoi")
-region = Rect2(100, 0, 50, 44)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_iic1c"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_e6u10")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rgrba")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0q3mf")
-}],
-"loop": false,
-"name": &"die",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tl1u1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bdabr")
-}],
-"loop": false,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ssdgx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7n5li")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dpvxm")
-}],
-"loop": true,
-"name": &"walk",
-"speed": 3.0
-}]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xviwe"]
-size = Vector2(33, 41)
+size = Vector2(33, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t5n01"]
 size = Vector2(34, 38)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ib5k"]
-size = Vector2(35, 41.5)
+size = Vector2(35, 39)
+
+[sub_resource type="Animation" id="Animation_wsfco"]
+resource_name = "RESET"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_johyo"]
+resource_name = "walk"
+length = 0.75
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0gdc2"]
+_data = {
+"RESET": SubResource("Animation_wsfco"),
+"walk": SubResource("Animation_johyo")
+}
 
 [node name="Walker" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 19
+collision_mask = 17
 script = ExtResource("1_fiel7")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_iic1c")
-animation = &"die"
-autoplay = "idle"
-frame = 2
-frame_progress = 1.0
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_xgmoi")
+hframes = 4
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_h3s33")]
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_w7r26")]
+collision_mask = 3
 health_component = NodePath("../HealthComponent")
 
 [node name="Hurtbox" type="CollisionShape2D" parent="HurtboxComponent"]
-position = Vector2(1.5, -0.5)
+position = Vector2(1.5, 0)
 shape = SubResource("RectangleShape2D_xviwe")
+debug_color = Color(0.972549, 0.141176, 0.227451, 0.419608)
 
 [node name="HitboxComponent" parent="." instance=ExtResource("5_5s5qx")]
+collision_mask = 1
 
 [node name="Hitbox" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(1, 1)
@@ -118,12 +84,19 @@ shape = SubResource("RectangleShape2D_t5n01")
 debug_color = Color(0.243137, 0.627451, 0.301961, 0.419608)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.5, 0.25)
+position = Vector2(1.5, 1.5)
 shape = SubResource("RectangleShape2D_4ib5k")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 2.5
 one_shot = true
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "walk"
+libraries = {
+"": SubResource("AnimationLibrary_0gdc2")
+}
+
+[connection signal="died" from="." to="." method="_on_died"]
 [connection signal="killed" from="HealthComponent" to="." method="_on_health_component_killed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

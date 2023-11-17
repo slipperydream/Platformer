@@ -6,13 +6,16 @@ signal died
 signal hit
 
 const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+const JUMP_VELOCITY = -650.0
 
 @onready var health = $HealthComponent
 @onready var sprites = $AnimatedSprite2D
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+func _ready():
+	$Camera2D.enabled = true
+	$Camera2D.position_smoothing_enabled = true
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -40,7 +43,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 
-func _on_health_component_killed():
+func _on_health_component_killed(_source):
 	emit_signal("died")
 
 
@@ -48,4 +51,4 @@ func _on_health_component_hit():
 	if health.invulnerable:
 		return
 	else:
-		scale.x /= 2
+		scale.x *= 0.33
