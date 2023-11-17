@@ -5,8 +5,8 @@ class_name Player
 signal died
 signal hit
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -650.0
+@export var SPEED : int = 300
+@export var JUMP_VELOCITY : int = -675
 
 @onready var health = $HealthComponent
 @onready var sprites = $AnimatedSprite2D
@@ -41,14 +41,24 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("duck"):
 		sprites.play("duck")
 	move_and_slide()
-
+	for index in get_slide_collision_count():
+		var collision = get_slide_collision(index)
+		var body = collision.get_collider()
+		if body is Block:
+			if is_on_ceiling():
+				body.hit()
 
 func _on_health_component_killed(_source):
 	emit_signal("died")
-
 
 func _on_health_component_hit():
 	if health.invulnerable:
 		return
 	else:
 		scale.x *= 0.33
+
+func _on_pickup_area_entered(area):
+	if area is Item:
+		if area is Cartridge:
+			$AnimationPlayer.play("pickup")
+		area.collect()

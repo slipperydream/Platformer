@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://f25vxph05437"]
+
+[ext_resource type="Script" path="res://world/tiles/block.gd" id="1_4sdpc"]
+[ext_resource type="Texture2D" uid="uid://0uaixt0eknu7" path="res://world/tiles/platformPack_tile029.png" id="2_pflfn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ib5k"]
+size = Vector2(65, 65)
+
+[node name="Block" type="StaticBody2D"]
+collision_layer = 64
+collision_mask = 5
+script = ExtResource("1_4sdpc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -0.911579)
+shape = SubResource("RectangleShape2D_4ib5k")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_pflfn")

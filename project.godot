@@ -62,4 +62,4 @@ shoot={
 2d_physics/layer_4="EnemyWeapons"
 2d_physics/layer_5="Ground"
 2d_physics/layer_6="Items"
-2d_physics/layer_7="Breakable"
+2d_physics/layer_7="Brick"
