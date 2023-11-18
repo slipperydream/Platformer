@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bq57bsxjerwtm"]
+[gd_scene load_steps=17 format=3 uid="uid://bq57bsxjerwtm"]
 
 [ext_resource type="Texture2D" uid="uid://81n5xobi81dh" path="res://world/platformPack_tilesheet.png" id="1_65h4v"]
 [ext_resource type="PackedScene" uid="uid://bmi1sl6ll8p8j" path="res://enemies/walker.tscn" id="2_p6sed"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bky5go0nr0biq" path="res://world/tiles/destroyable_block.tscn" id="7_cfclj"]
 [ext_resource type="Texture2D" uid="uid://bb1kf4agpbqmv" path="res://world/tiles/platformPack_tile021.png" id="7_qqj51"]
 [ext_resource type="PackedScene" uid="uid://daxuvqlbexkt4" path="res://world/tiles/door.tscn" id="9_7dtvb"]
+[ext_resource type="PackedScene" uid="uid://cvk6dqbkcgucb" path="res://enemies/spikey.tscn" id="13_x25x0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ow05n"]
 texture = ExtResource("1_65h4v")
@@ -38390,3 +38391,6 @@ position = Vector2(8848.33, 486.227)
 position = Vector2(11129, 445)
 connection = NodePath("../Door3")
 is_locked = false
+
+[node name="Spikey" parent="." instance=ExtResource("13_x25x0")]
+position = Vector2(1251, 490)

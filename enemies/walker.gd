@@ -1,54 +1,21 @@
-extends CharacterBody2D
+extends Enemy
 
-class_name Enemy
+class_name Walker
 
-signal died
-
-const SPEED = 100.0
-
-
-@onready var health = $HealthComponent
-@onready var hurtbox = $HurtboxComponent
-@onready var hitbox = $HitboxComponent
-@onready var sprites = $Sprite2D
-@onready var animation_player = $AnimationPlayer
 @onready var timer = $Timer
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var direction = Vector2.ZERO
+@onready var animation_player = $AnimationPlayer
+@export var patrol_time : float = 3
 
 func _ready():
+	super._ready()
+	timer.wait_time = patrol_time
 	timer.start()
-	direction = Vector2.LEFT
-	
-func _physics_process(delta):
-	# Add the gravity.
-	if health.is_dead:
-		return
-	if not is_on_floor():
-		velocity.y += gravity * delta
-
-
-	if direction.x < 0:
-		sprites.flip_h = true
-	elif direction.x > 0:
-		sprites.flip_h = false
-	animation_player.play("walk")
-	velocity.x = direction.x * SPEED
-	move_and_slide()
-
-func _on_health_component_killed(_source):
-	emit_signal("died")
 
 func _on_timer_timeout():
 	if direction == Vector2.LEFT:
 		direction = Vector2.RIGHT
 	else:
 		direction = Vector2.LEFT
-	$Timer.start()
+	animation_player.play("walk")
+	timer.start()
 
-func _on_died():
-	queue_free()
-	
-func spawn(pos):
-	global_position = pos
