@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://c3akcbehailqv"]
+[gd_scene load_steps=7 format=3 uid="uid://c3akcbehailqv"]
 
 [ext_resource type="PackedScene" uid="uid://7sy7gc06sx86" path="res://ui/life_counter.tscn" id="3_prvo3"]
-[ext_resource type="Script" path="res://Camera2D2.gd" id="3_uuik2"]
 [ext_resource type="PackedScene" uid="uid://cmxeh4a4jblpp" path="res://ui/score_tracker.tscn" id="4_tomij"]
 [ext_resource type="PackedScene" uid="uid://bq57bsxjerwtm" path="res://world/levels/level.tscn" id="5_0vttg"]
 [ext_resource type="PackedScene" uid="uid://b7rmd6tm1lldq" path="res://ui/time.tscn" id="5_xw3k8"]
@@ -9,29 +8,52 @@
 [ext_resource type="PackedScene" uid="uid://ckk8h8uqnjggi" path="res://player/player.tscn" id="6_qblrp"]
 
 [node name="Main" type="Node2D"]
+metadata/_edit_horizontal_guides_ = []
+metadata/_edit_vertical_guides_ = []
 
 [node name="TileMap" parent="." instance=ExtResource("5_0vttg")]
+position = Vector2(0, 0)
 
 [node name="Player" parent="TileMap" instance=ExtResource("6_qblrp")]
 position = Vector2(153, 459)
 
-[node name="Camera2D2" type="Camera2D" parent="TileMap/Player"]
-offset = Vector2(425, -150)
-script = ExtResource("3_uuik2")
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="TileMap/Player"]
+remote_path = NodePath("../../../Camera2D")
 
-[node name="LifeCounter" parent="TileMap" instance=ExtResource("3_prvo3")]
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(153, 459)
+process_callback = 0
+limit_left = 0
+limit_top = -1
+limit_right = 13750
+limit_bottom = 700
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+
+[node name="LifeCounter" parent="Camera2D/CanvasLayer" instance=ExtResource("3_prvo3")]
 offset_left = 214.0
+offset_top = -3.0
 offset_right = 286.0
+offset_bottom = 32.0
 
-[node name="ScoreTracker" parent="TileMap" instance=ExtResource("4_tomij")]
+[node name="ScoreTracker" parent="Camera2D/CanvasLayer" instance=ExtResource("4_tomij")]
+offset_top = -3.0
+offset_bottom = 69.0
 
-[node name="Time" parent="TileMap" instance=ExtResource("5_xw3k8")]
-offset_left = 574.0
-offset_right = 623.0
+[node name="Time" parent="Camera2D/CanvasLayer" instance=ExtResource("5_xw3k8")]
+offset_left = -2.0
+offset_top = -3.0
+offset_right = 47.0
+offset_bottom = 65.0
 
-[node name="EndGameBanner" parent="TileMap" instance=ExtResource("6_m2msb")]
+[node name="EndGameBanner" parent="Camera2D/CanvasLayer" instance=ExtResource("6_m2msb")]
 visible = false
-offset_left = 448.0
-offset_top = 150.0
-offset_right = 704.0
-offset_bottom = 214.0
+offset_left = -128.0
+offset_top = -177.0
+offset_right = 128.0
+offset_bottom = -113.0

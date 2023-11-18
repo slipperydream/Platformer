@@ -40,7 +40,6 @@ func _physics_process(delta):
 func _on_health_component_killed(_source):
 	emit_signal("died")
 
-
 func _on_timer_timeout():
 	if direction == Vector2.LEFT:
 		direction = Vector2.RIGHT
@@ -51,3 +50,5 @@ func _on_timer_timeout():
 func _on_died():
 	queue_free()
 	
+func spawn(pos):
+	global_position = pos

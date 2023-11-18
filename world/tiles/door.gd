@@ -33,4 +33,5 @@ func set_door_textures(locked):
 func _on_body_entered(body):
 	if not is_locked:
 		if body is Player or body is Enemy:
-			body.global_position = Vector2(connection.global_position.x+64, connection.global_position.y)
+			if body.is_on_floor():
+				body.global_position = Vector2(connection.global_position.x+64, connection.global_position.y)
