@@ -72,3 +72,5 @@ shoot={
 2d_physics/layer_5="Ground"
 2d_physics/layer_6="Items"
 2d_physics/layer_7="Brick"
+2d_physics/layer_8="Lava"
+2d_physics/layer_9="Doors"

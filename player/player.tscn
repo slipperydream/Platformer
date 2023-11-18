@@ -224,7 +224,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
-collision_mask = 92
+collision_mask = 220
 script = ExtResource("1_r5672")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -233,8 +233,11 @@ shape = SubResource("RectangleShape2D_4ib5k")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_iic1c")
-animation = &"happy"
+animation = &"walk_right"
 autoplay = "idle"
+
+[node name="Marker2D" type="Marker2D" parent="AnimatedSprite2D"]
+position = Vector2(36.25, 23.75)
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_i04tb")]
 max_health = 2
@@ -291,4 +294,5 @@ script = ExtResource("10_c84k7")
 
 [connection signal="hit" from="HealthComponent" to="." method="_on_health_component_hit"]
 [connection signal="killed" from="HealthComponent" to="." method="_on_health_component_killed"]
+[connection signal="body_entered" from="HurtboxComponent" to="." method="_on_hurtbox_component_body_entered"]
 [connection signal="area_entered" from="Pickup" to="." method="_on_pickup_area_entered"]

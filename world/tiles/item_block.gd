@@ -11,7 +11,7 @@ func _ready():
 func spawn_item():
 	var item = item_scene.instantiate()
 	get_parent().call_deferred("add_child", item)
-	item.spawn(global_position)
+	item.spawn(Vector2(global_position.x, global_position.y-64))
 	
 func is_still_active():	
 	super.is_still_active()

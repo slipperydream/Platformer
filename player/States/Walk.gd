@@ -21,7 +21,7 @@ func physics_update(delta):
 			player.sprites.play("walk_left")
 		elif direction > 0:
 			player.sprites.play("walk_right")
-		player.velocity.x = direction * player.speed
+		player.velocity.x = direction * player.speed 
 	else:	
 		player.velocity.x = move_toward(player.velocity.x, 0, player.speed)
 		
@@ -31,7 +31,7 @@ func physics_update(delta):
 	if Input.is_action_just_pressed("duck"):
 		Transitioned.emit(self, "duck")
 		
-	if abs(0 - player.velocity.x) < 0.0001:
+	if abs(0 - player.velocity.x) <= 0.0001:
 		Transitioned.emit(self, "idle")
 		
 

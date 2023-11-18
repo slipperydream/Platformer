@@ -10,6 +10,7 @@ signal hit
 
 @onready var health = $HealthComponent
 @onready var sprites = $AnimatedSprite2D
+@onready var hand = $AnimatedSprite2D/Marker2D
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -22,7 +23,6 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 	
 	move_and_slide()
-
 
 func _on_health_component_killed(_source):
 	emit_signal("died")
@@ -37,4 +37,11 @@ func _on_pickup_area_entered(area):
 	if area is Item:
 		if area is Cartridge:
 			$AnimationPlayer.play("pickup")
-		area.collect()
+		if area.has_method("pickup"):
+			area.pickup(self, hand.position)
+		else:
+			area.collect()
+
+func _on_hurtbox_component_body_entered(body):
+	if body.collision_layer == 8:
+		health.take_damage(500)
