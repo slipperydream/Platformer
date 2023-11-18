@@ -19,27 +19,19 @@ position = Vector2(153, 459)
 offset = Vector2(425, -150)
 script = ExtResource("3_uuik2")
 
-[node name="LifeCounter" parent="TileMap/Player/Camera2D2" instance=ExtResource("3_prvo3")]
-offset_left = 61.0
-offset_top = -459.0
-offset_right = 133.0
-offset_bottom = -424.0
+[node name="LifeCounter" parent="TileMap" instance=ExtResource("3_prvo3")]
+offset_left = 214.0
+offset_right = 286.0
 
-[node name="ScoreTracker" parent="TileMap/Player/Camera2D2" instance=ExtResource("4_tomij")]
-offset_left = -153.0
-offset_top = -459.0
-offset_right = 103.0
-offset_bottom = -387.0
+[node name="ScoreTracker" parent="TileMap" instance=ExtResource("4_tomij")]
 
-[node name="Time" parent="TileMap/Player/Camera2D2" instance=ExtResource("5_xw3k8")]
-offset_left = 421.0
-offset_top = -459.0
-offset_right = 470.0
-offset_bottom = -391.0
+[node name="Time" parent="TileMap" instance=ExtResource("5_xw3k8")]
+offset_left = 574.0
+offset_right = 623.0
 
-[node name="EndGameBanner" parent="TileMap/Player/Camera2D2" instance=ExtResource("6_m2msb")]
+[node name="EndGameBanner" parent="TileMap" instance=ExtResource("6_m2msb")]
 visible = false
-offset_left = 295.0
-offset_top = -309.0
-offset_right = 551.0
-offset_bottom = -245.0
+offset_left = 448.0
+offset_top = 150.0
+offset_right = 704.0
+offset_bottom = 214.0
